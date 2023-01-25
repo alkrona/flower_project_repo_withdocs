@@ -12,7 +12,7 @@ import random
 import analytical_wave_speed_test
 import pythonToFirebasesender
 mode=1
-cap = cv.VideoCapture(1)
+cap = cv.VideoCapture(1) # used to set the correct webcam
 cap.set(3,680)
 cap.set(4,480)
 detector=pm.PoseDetector(detectionCon=.8)
@@ -23,11 +23,11 @@ while True:
     img=cv.flip(img,1)
     img=detector.findPose(img)
     lmList,bbox=detector.findPosition(img,False)
-    if len(lmList)==33:
+    if len(lmList)==33: # checking if the output is correct
         if lmList[16][1]>lmList[15][1] and lmList[14][2]>lmList[16][2] and lmList[14][2]>lmList[12][2] and lmList[13][2]>lmList[15][2] and lmList[13][2]>lmList[15][2] and time.time()>t_secondary+3:
-            t_initial=time.time()
+            t_initial=time.time() # checking to see if the person has displayed an X pattern to the screen.
             print("engage mode 1")
-            cap.release()
+            cap.release() # frees up the webcam for use by another application
             cv.destroyAllWindows()
             #testing_push_menu_integration.the_main_function()
             testing_push_menu_intergration_version2.the_main_function()
